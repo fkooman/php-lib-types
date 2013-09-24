@@ -24,6 +24,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     {
         $s = new String("foo");
         $this->assertEquals("foo", $s->getValue());
+        $this->assertEquals(3, $s->length());
     }
 
     /**
