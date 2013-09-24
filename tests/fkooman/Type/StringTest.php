@@ -18,9 +18,11 @@
 
 namespace fkooman\Type;
 
+use OutOfRangeException;
+
 class StringTest extends \PHPUnit_Framework_TestCase
 {
-    public function testContructor()
+    public function testString()
     {
         $s = new String("foo");
         $this->assertEquals("foo", $s->getValue());
@@ -31,6 +33,14 @@ class StringTest extends \PHPUnit_Framework_TestCase
     public function testEmptyString()
     {
         $s = new String("");
+        $this->assertEquals("", $s->getValue());
+        $this->assertEquals(0, $s->length());
+        $this->assertTrue($s->isEmpty());
+    }
+
+    public function testEmptyStringNoParameter()
+    {
+        $s = new String();
         $this->assertEquals("", $s->getValue());
         $this->assertEquals(0, $s->length());
         $this->assertTrue($s->isEmpty());
@@ -51,6 +61,31 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("foo", $s->__toString());
     }
 
+    public function testCompareTo()
+    {
+        $s = new String("foo");
+        $t = new String("bar");
+        $this->assertEquals(1, $s->compareTo($t));
+        $this->assertEquals(-1, $t->compareTo($s));
+        $this->assertEquals(0, $s->compareTo($s));
+    }
+
+    public function testCompareToIgnoreCase()
+    {
+        $s = new String("FoO");
+        $t = new String("bAr");
+        $this->assertEquals(1, $s->compareToIgnoreCase($t));
+        $this->assertEquals(-1, $t->compareToIgnoreCase($s));
+        $this->assertEquals(0, $s->compareToIgnoreCase($s));
+    }
+
+    public function testConcat()
+    {
+        $s = new String("foo");
+        $t = new String("bar");
+        $this->assertEquals("foobar", $s->concat($t)->__toString());
+    }
+
     public function testIndexOf()
     {
         $s = new String("foobar");
@@ -60,55 +95,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     public function testIndexOfNonExisting()
     {
         $s = new String("foobar");
-        $this->assertFalse($s->indexOf(new String("baz")));
-    }
-
-    public function testSubString()
-    {
-        $s = new String("foobar");
-        $this->assertEquals("ooba", $s->subString(1, 4)->__toString());
-    }
-
-    public function testSubStringInBounds()
-    {
-        $s = new String("foobar");
-        $this->assertEquals("foobar", $s->subString(0, 6)->__toString());
-    }
-
-    /**
-     * @expectedException OutOfBoundsException
-     * @expectedExceptionMessage length outside of string boundary
-     */
-    public function testSubStringOutOfBoundsLength()
-    {
-        $s = new String("foobar");
-        $s->subString(1, 6);
-    }
-
-    /**
-     * @expectedException OutOfBoundsException
-     * @expectedExceptionMessage negative offset
-     */
-    public function testSubStringOutOfBoundsNegativeOffset()
-    {
-        $s = new String("foobar");
-        $s->subString(-1, 3);
-    }
-
-    /**
-     * @expectedException OutOfBoundsException
-     * @expectedExceptionMessage offset outside of string boundary
-     */
-    public function testSubStringOutOfBoundsOffset()
-    {
-        $s = new String("foobar");
-        $s->subString(12, 3);
-    }
-
-    public function testTrim()
-    {
-        $s = new String("  foo bar  ");
-        $this->assertEquals("foo bar", $s->trim()->__toString());
+        $this->assertEquals(-1, $s->indexOf(new String("baz")));
     }
 
     public function testToLowerCase()
@@ -121,5 +108,79 @@ class StringTest extends \PHPUnit_Framework_TestCase
     {
         $s = new String("foo_BAR");
         $this->assertEquals("FOO_BAR", $s->toUpperCase()->__toString());
+    }
+
+    public function testSubstringOneParameter()
+    {
+        $s = new String("hamburger");
+        $this->assertEquals("urger", $s->substring(4)->__toString());
+    }
+
+    public function testSubstringTwoParameters()
+    {
+        $s = new String("hamburger");
+        $this->assertEquals("urge", $s->substring(4, 8)->__toString());
+        $t = new String("smiles");
+        $this->assertEquals("mile", $t->substring(1, 5)->__toString());
+        $u = new String("smiles");
+        $this->assertEquals("smiles", $u->substring(0, 6)->__toString());
+        $v = new String("smiles");
+        $this->assertEquals("", $v->substring(1, 1)->__toString());
+    }
+
+    /**
+     * @expectedException OutOfRangeException
+     * @expectedExceptionMessage negative index
+     */
+    public function testSubstringNegativeBeginIndex()
+    {
+        $s = new String("hamburger");
+        $s->substring(-1);
+    }
+
+    /**
+     * @expectedException OutOfRangeException
+     * @expectedExceptionMessage negative index
+     */
+    public function testSubstringInvalidNegativeEndIndex()
+    {
+        $s = new String("hamburger");
+        $s->substring(0, -1);
+    }
+
+    /**
+     * @expectedException OutOfBoundsException
+     * @expectedExceptionMessage begin index exceeds string length
+     */
+    public function testSubstringOutOfBoundsBeginIndex()
+    {
+        $s = new String("hamburger");
+        $s->substring(100);
+    }
+
+    /**
+     * @expectedException OutOfBoundsException
+     * @expectedExceptionMessage end index exceeds string length
+     */
+    public function testSubstringOutOfBoundsEndIndex()
+    {
+        $s = new String("hamburger");
+        $s->substring(0, 100);
+    }
+
+    /**
+     * @expectedException OutOfRangeException
+     * @expectedExceptionMessage end index bigger than begin index
+     */
+    public function testSubstringEndIndexBeforeBeginIndex()
+    {
+        $s = new String("hamburger");
+        $s->substring(3, 2);
+    }
+
+    public function testTrim()
+    {
+        $s = new String("  foo bar  ");
+        $this->assertEquals("foo bar", $s->trim()->__toString());
     }
 }

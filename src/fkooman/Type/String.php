@@ -20,10 +20,11 @@ namespace fkooman\Type;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use OutOfRangeException;
 
 class String extends BaseType
 {
-    public function __construct($value)
+    public function __construct($value = '')
     {
         if (!is_string($value)) {
             throw new InvalidArgumentException("not a string");
@@ -32,7 +33,65 @@ class String extends BaseType
     }
 
     /**
-     * Returns the length of the string
+     * @return int
+     */
+    public function compareTo(String $s)
+    {
+        $returnValue = strcmp($this->value, $s->getValue());
+        if ($returnValue < 0) {
+            return -1;
+        } elseif ($returnValue > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @return int
+     */
+    public function compareToIgnoreCase(String $s)
+    {
+        $returnValue = strcasecmp($this->value, $s->getValue());
+        if ($returnValue < 0) {
+            return -1;
+        } elseif ($returnValue > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @return String
+     */
+    public function concat(String $s)
+    {
+        return new String($this->value . $s->getValue());
+    }
+
+    /**
+     * @return int
+     */
+    public function indexOf(String $s)
+    {
+        $returnValue = strpos($this->value, $s->getValue());
+        if (false === $returnValue) {
+            return -1;
+        }
+
+        return $returnValue;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return 0 === $this->length();
+    }
+
+    /**
      * @return int
      */
     public function length()
@@ -41,50 +100,64 @@ class String extends BaseType
     }
 
     /**
-     * Return the position of string
-     * @param String s the string to find the position of
-     * @return int|false the position of s in this string starting from 0, or
-     *                   false if s was not found
+     * @return String
      */
-    public function indexOf(String $s)
-    {
-        return strpos($this->value, $s->getValue());
-    }
-
-    public function isEmpty()
-    {
-        return 0 === $this->length();
-    }
-
-    public function trim()
-    {
-        return new String(trim($this->value));
-    }
-
-    public function toUpperCase()
-    {
-        return new String(strtoupper($this->value));
-    }
-
     public function toLowerCase()
     {
         return new String(strtolower($this->value));
     }
 
-    public function subString($offset, $length)
+    /**
+     * @return String
+     */
+    public function toUpperCase()
     {
-        $o = new Integer($offset);
-        $l = new Integer($length);
-        if (0 > $o->getValue()) {
-            throw new OutOfBoundsException("negative offset");
-        }
-        if ($this->length() < $o->getValue()) {
-            throw new OutOfBoundsException("offset outside of string boundary");
-        }
-        if ($this->length() < $o->getValue() + $l->getValue()) {
-            throw new OutOfBoundsException("length outside of string boundary");
+        return new String(strtoupper($this->value));
+    }
+
+    /**
+     * @return String
+     */
+    public function substring($beginIndex, $endIndex = null)
+    {
+        $b = new Integer($beginIndex);
+        if (null === $endIndex) {
+            $e = new Integer($this->length());
+        } else {
+            $e = new Integer($endIndex);
         }
 
-        return new String(substr($this->value, $o->getValue(), $l->getValue()));
+        if (0 > $b->getValue()) {
+            throw new OutOfRangeException("negative index");
+        }
+        if ($this->length() <= $b->getValue()) {
+            throw new OutOfBoundsException("begin index exceeds string length");
+        }
+        if (0 > $e->getValue()) {
+            throw new OutOfRangeException("negative index");
+        }
+        if ($this->length() < $e->getValue()) {
+            throw new OutOfBoundsException("end index exceeds string length");
+        }
+        if ($b->getValue() > $e->getValue()) {
+            throw new OutOfRangeException("end index bigger than begin index");
+        }
+
+        return new String(
+            substr(
+                $this->value,
+                $b->getValue(),
+                $e->getValue() - $b->getValue()
+            )
+        );
     }
+
+    /**
+     * @return String
+     */
+    public function trim()
+    {
+        return new String(trim($this->value));
+    }
+
 }
