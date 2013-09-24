@@ -42,7 +42,8 @@ class String extends BaseType
     /**
      * Return the position of string
      * @param String s the string to find the position of
-     * @return int
+     * @return int|false the position of s in this string starting from 0, or
+     *                   false if s was not found
      */
     public function indexOf(String $s)
     {
