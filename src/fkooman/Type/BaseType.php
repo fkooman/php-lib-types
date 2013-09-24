@@ -18,32 +18,22 @@
 
 namespace fkooman\Type;
 
-class BooleanTest extends \PHPUnit_Framework_TestCase
+class BaseType
 {
-    public function testContructor()
+    protected $value;
+
+    public function __construct($value)
     {
-        $s = new Boolean(true);
-        $this->assertEquals(true, $s->getValue());
+        $this->value = $value;
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage not a boolean
-     */
-    public function testNonBooleanParameter()
+    public function getValue()
     {
-        $s = new Boolean(1);
+        return $this->value;
     }
 
-    public function testToStringTrue()
+    public function __toString()
     {
-        $s = new Boolean(true);
-        $this->assertEquals("true", $s->__toString());
-    }
-
-    public function testToStringFalse()
-    {
-        $s = new Boolean(false);
-        $this->assertEquals("false", $s->__toString());
+        return strval($this->value);
     }
 }

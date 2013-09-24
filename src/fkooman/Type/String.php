@@ -20,21 +20,14 @@ namespace fkooman\Type;
 
 use InvalidArgumentException;
 
-class String
+class String extends BaseType
 {
-    private $value;
-
     public function __construct($value)
     {
         if (!is_string($value)) {
             throw new InvalidArgumentException("not a string");
         }
-        $this->value = $value;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
+        parent::__construct($value);
     }
 
     public function length()

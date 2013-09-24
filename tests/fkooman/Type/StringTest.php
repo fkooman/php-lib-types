@@ -42,4 +42,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
     {
         $s = new String(123);
     }
+
+    public function testToString()
+    {
+        $s = new String("foo");
+        $this->assertEquals("foo", $s->__toString());
+    }
 }

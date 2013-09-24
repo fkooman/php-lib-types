@@ -34,4 +34,10 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
     {
         $s = new Integer("foo");
     }
+
+    public function testToString()
+    {
+        $s = new Integer(5);
+        $this->assertEquals("5", $s->__toString());
+    }
 }

@@ -20,20 +20,13 @@ namespace fkooman\Type;
 
 use InvalidArgumentException;
 
-class Integer
+class Integer extends BaseType
 {
-    private $value;
-
     public function __construct($value)
     {
         if (!is_int($value)) {
             throw new InvalidArgumentException("not an integer");
         }
-        $this->value = $value;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
+        parent::__construct($value);
     }
 }

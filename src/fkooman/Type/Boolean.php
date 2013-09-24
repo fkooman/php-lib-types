@@ -20,20 +20,18 @@ namespace fkooman\Type;
 
 use InvalidArgumentException;
 
-class Boolean
+class Boolean extends BaseType
 {
-    private $value;
-
     public function __construct($value)
     {
         if (!is_bool($value)) {
             throw new InvalidArgumentException("not a boolean");
         }
-        $this->value = $value;
+        parent::__construct($value);
     }
 
-    public function getValue()
+    public function __toString()
     {
-        return $this->value;
+        return $this->value ? "true" : "false";
     }
 }
