@@ -1,0 +1,20 @@
+{
+    "authors": [
+        {
+            "email": "fkooman@tuxed.net",
+            "name": "Fran\u00e7ois Kooman",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "fkooman\\Type\\": "src/"
+        }
+    },
+    "description": "PHP library wrapper for type enforcement.",
+    "license": "Apache-2.0",
+    "name": "fkooman/php-lib-types",
+    "require": {
+        "php": ">=5.3.3"
+    }
+}
