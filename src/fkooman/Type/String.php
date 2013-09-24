@@ -56,6 +56,11 @@ class String extends BaseType
         return 0 === $this->length();
     }
 
+    public function trim()
+    {
+        return new String(trim($this->value));
+    }
+
     public function subString($offset, $length)
     {
         $o = new Integer($offset);

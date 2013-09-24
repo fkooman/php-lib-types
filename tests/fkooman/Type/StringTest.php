@@ -104,4 +104,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $s = new String("foobar");
         $s->subString(12, 3);
     }
+
+    public function testTrim()
+    {
+        $s = new String("  foo bar  ");
+        $this->assertEquals("foo bar", $s->trim()->__toString());
+    }
 }
