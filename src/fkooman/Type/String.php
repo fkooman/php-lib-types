@@ -159,5 +159,4 @@ class String extends BaseType
     {
         return new String(trim($this->value));
     }
-
 }
