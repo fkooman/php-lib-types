@@ -54,4 +54,52 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $s = new String("foobar");
         $this->assertEquals(3, $s->indexOf(new String("bar")));
     }
+
+    public function testIndexOfNonExisting()
+    {
+        $s = new String("foobar");
+        $this->assertFalse($s->indexOf(new String("baz")));
+    }
+
+    public function testSubString()
+    {
+        $s = new String("foobar");
+        $this->assertEquals("ooba", $s->subString(1, 4)->__toString());
+    }
+
+    public function testSubStringInBounds()
+    {
+        $s = new String("foobar");
+        $this->assertEquals("foobar", $s->subString(0, 6)->__toString());
+    }
+
+    /**
+     * @expectedException OutOfBoundsException
+     * @expectedExceptionMessage length outside of string boundary
+     */
+    public function testSubStringOutOfBoundsLength()
+    {
+        $s = new String("foobar");
+        $s->subString(1, 6);
+    }
+
+    /**
+     * @expectedException OutOfBoundsException
+     * @expectedExceptionMessage negative offset
+     */
+    public function testSubStringOutOfBoundsNegativeOffset()
+    {
+        $s = new String("foobar");
+        $s->subString(-1, 3);
+    }
+
+    /**
+     * @expectedException OutOfBoundsException
+     * @expectedExceptionMessage offset outside of string boundary
+     */
+    public function testSubStringOutOfBoundsOffset()
+    {
+        $s = new String("foobar");
+        $s->subString(12, 3);
+    }
 }

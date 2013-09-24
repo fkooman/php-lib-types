@@ -19,6 +19,7 @@
 namespace fkooman\Type;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
 
 class String extends BaseType
 {
@@ -48,5 +49,22 @@ class String extends BaseType
     public function indexOf(String $s)
     {
         return strpos($this->value, $s->getValue());
+    }
+
+    public function subString($offset, $length)
+    {
+        $o = new Integer($offset);
+        $l = new Integer($length);
+        if (0 > $o->getValue()) {
+            throw new OutOfBoundsException("negative offset");
+        }
+        if ($this->length() < $o->getValue()) {
+            throw new OutOfBoundsException("offset outside of string boundary");
+        }
+        if ($this->length() < $o->getValue() + $l->getValue()) {
+            throw new OutOfBoundsException("length outside of string boundary");
+        }
+
+        return new String(substr($this->value, $o->getValue(), $l->getValue()));
     }
 }
