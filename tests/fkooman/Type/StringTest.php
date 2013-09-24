@@ -27,6 +27,13 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $s->length());
     }
 
+    public function testEmptyString()
+    {
+        $s = new String("");
+        $this->assertEquals("", $s->getValue());
+        $this->assertEquals(0, $s->length());
+    }
+
     /**
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage not a string
