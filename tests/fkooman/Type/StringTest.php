@@ -48,4 +48,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $s = new String("foo");
         $this->assertEquals("foo", $s->__toString());
     }
+
+    public function testIndexOf()
+    {
+        $s = new String("foobar");
+        $this->assertEquals(3, $s->indexOf(new String("bar")));
+    }
 }

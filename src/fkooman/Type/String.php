@@ -30,8 +30,22 @@ class String extends BaseType
         parent::__construct($value);
     }
 
+    /**
+     * Returns the length of the string
+     * @return int
+     */
     public function length()
     {
         return strlen($this->value);
+    }
+
+    /**
+     * Return the position of string
+     * @param String s the string to find the position of
+     * @return int
+     */
+    public function indexOf(String $s)
+    {
+        return strpos($this->value, $s->getValue());
     }
 }
