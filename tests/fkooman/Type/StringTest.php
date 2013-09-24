@@ -110,4 +110,16 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $s = new String("  foo bar  ");
         $this->assertEquals("foo bar", $s->trim()->__toString());
     }
+
+    public function testToLowerCase()
+    {
+        $s = new String("FOO_Bar");
+        $this->assertEquals("foo_bar", $s->toLowerCase()->__toString());
+    }
+
+    public function testToUpperCase()
+    {
+        $s = new String("foo_BAR");
+        $this->assertEquals("FOO_BAR", $s->toUpperCase()->__toString());
+    }
 }

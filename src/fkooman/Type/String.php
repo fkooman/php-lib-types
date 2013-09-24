@@ -61,6 +61,16 @@ class String extends BaseType
         return new String(trim($this->value));
     }
 
+    public function toUpperCase()
+    {
+        return new String(strtoupper($this->value));
+    }
+
+    public function toLowerCase()
+    {
+        return new String(strtolower($this->value));
+    }
+
     public function subString($offset, $length)
     {
         $o = new Integer($offset);
