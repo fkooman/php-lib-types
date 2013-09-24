@@ -51,6 +51,11 @@ class String extends BaseType
         return strpos($this->value, $s->getValue());
     }
 
+    public function isEmpty()
+    {
+        return 0 === $this->length();
+    }
+
     public function subString($offset, $length)
     {
         $o = new Integer($offset);
