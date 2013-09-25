@@ -137,6 +137,17 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("FOO_BAR", $s->toUpperCase()->__toString());
     }
 
+    public function testStartsWith()
+    {
+        $s = new String("foobar");
+        $this->assertTrue($s->startsWith(new String("foo")));
+        $this->assertFalse($s->startsWith(new String("bar")));
+        $t = new String();
+        $this->assertFalse($t->startsWith(new String("foo")));
+        $u = new String("foo");
+        $this->assertFalse($u->startsWith(new String("foobar")));
+    }
+
     public function testSubstringOneParameter()
     {
         $s = new String("hamburger");

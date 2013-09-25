@@ -136,6 +136,14 @@ class String extends BaseType
     }
 
     /**
+     * @return bool
+     */
+    public function startsWith(String $prefix)
+    {
+        return 0 === $this->indexOf($prefix);
+    }
+
+    /**
      * @return String
      */
     public function substring($beginIndex, $endIndex = null)
