@@ -100,6 +100,26 @@ class String extends BaseType
     }
 
     /**
+     * @return String[]
+     */
+    public function split(String $delimiter)
+    {
+        $explodedString = explode($delimiter->getValue(), $this->value);
+        $stringArray = array();
+        foreach ($explodedString as $stringPart) {
+            $stringArray[] = new String($stringPart);
+        }
+        // remove the empty strings at the end
+        $i = count($stringArray) - 1;
+        while ($stringArray[$i]->isEmpty()) {
+            unset($stringArray[$i]);
+            $i--;
+        }
+
+        return array_values($stringArray);
+    }
+
+    /**
      * @return String
      */
     public function toLowerCase()

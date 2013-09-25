@@ -98,6 +98,33 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(-1, $s->indexOf(new String("baz")));
     }
 
+    public function testSplitNoMatch()
+    {
+        $s = new String("foo");
+        $splitArray = $s->split(new String(":"));
+        $this->assertEquals(1, count($splitArray));
+        $this->assertEquals("foo", $splitArray[0]->__toString());
+    }
+
+    public function testSplitSimple()
+    {
+        $s = new String("foo:bar");
+        $splitArray = $s->split(new String(":"));
+        $this->assertEquals(2, count($splitArray));
+        $this->assertEquals("foo", $splitArray[0]->__toString());
+        $this->assertEquals("bar", $splitArray[1]->__toString());
+    }
+
+    public function testSplitAdvanced()
+    {
+        $s = new String("boo:and:foo");
+        $splitArray = $s->split(new String("o"));
+        $this->assertEquals(3, count($splitArray));
+        $this->assertEquals("b", $splitArray[0]->__toString());
+        $this->assertEquals("", $splitArray[1]->__toString());
+        $this->assertEquals(":and:f", $splitArray[2]->__toString());
+    }
+
     public function testToLowerCase()
     {
         $s = new String("FOO_Bar");
