@@ -8,7 +8,7 @@ The API aims at implementing the Java API as much as possible. Especially for
 the `String` class work has been done to make the API very similar.
 
 # Alternatives
-There is (SPL_Types)[http://pecl.php.net/package/SPL_Types], but is not widely
+There is [SPL_Types](http://pecl.php.net/package/SPL_Types), but is not widely
 available, it needs PECL module installation which is inconvenient.
 
 # Features
