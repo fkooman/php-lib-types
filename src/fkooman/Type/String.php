@@ -106,7 +106,7 @@ class String extends BaseType
     {
         $matchPattern = new String('/');
         $matchPattern = $matchPattern->concat($pattern)->concat(new String('/'));
-        $returnValue = preg_match($matchPattern->getValue(), $this->value);
+        $returnValue = @preg_match($matchPattern->getValue(), $this->value);
         if (false === $returnValue) {
             throw new InvalidArgumentException("invalid pattern");
         }

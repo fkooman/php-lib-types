@@ -106,6 +106,16 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($s->matches(new String('^[a-c]+$')));
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage invalid pattern
+     */
+    public function testMatchesWrongPattern()
+    {
+        $s = new String("foobar");
+        $s->matches(new String("/"));
+    }
+
     public function testSplitNoMatch()
     {
         $s = new String("foo");
