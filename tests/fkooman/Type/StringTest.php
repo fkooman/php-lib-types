@@ -98,6 +98,14 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(-1, $s->indexOf(new String("baz")));
     }
 
+    public function testMatches()
+    {
+        $s = new String("foobar");
+        $this->assertTrue($s->matches(new String("^.*$")));
+        $this->assertTrue($s->matches(new String('^[a-z]+$')));
+        $this->assertFalse($s->matches(new String('^[a-c]+$')));
+    }
+
     public function testSplitNoMatch()
     {
         $s = new String("foo");

@@ -100,6 +100,21 @@ class String extends BaseType
     }
 
     /**
+     * @return bool
+     */
+    public function matches(String $pattern)
+    {
+        $matchPattern = new String('/');
+        $matchPattern = $matchPattern->concat($pattern)->concat(new String('/'));
+        $returnValue = preg_match($matchPattern->getValue(), $this->value);
+        if (false === $returnValue) {
+            throw new InvalidArgumentException("invalid pattern");
+        }
+
+        return 1 === $returnValue;
+    }
+
+    /**
      * @return String[]
      */
     public function split(String $delimiter)
