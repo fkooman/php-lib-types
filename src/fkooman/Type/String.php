@@ -37,14 +37,7 @@ class String extends BaseType
      */
     public function compareTo(String $s)
     {
-        $returnValue = strcmp($this->value, $s->getValue());
-        if ($returnValue < 0) {
-            return -1;
-        } elseif ($returnValue > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return strcmp($this->value, $s->getValue());
     }
 
     /**
@@ -52,14 +45,7 @@ class String extends BaseType
      */
     public function compareToIgnoreCase(String $s)
     {
-        $returnValue = strcasecmp($this->value, $s->getValue());
-        if ($returnValue < 0) {
-            return -1;
-        } elseif ($returnValue > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return strcasecmp($this->value, $s->getValue());
     }
 
     /**

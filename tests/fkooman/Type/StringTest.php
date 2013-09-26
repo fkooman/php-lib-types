@@ -65,8 +65,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
     {
         $s = new String("foo");
         $t = new String("bar");
-        $this->assertEquals(1, $s->compareTo($t));
-        $this->assertEquals(-1, $t->compareTo($s));
+        $this->assertGreaterThan(0, $s->compareTo($t));
+        $this->assertLessThan(0, $t->compareTo($s));
         $this->assertEquals(0, $s->compareTo($s));
     }
 
@@ -74,8 +74,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
     {
         $s = new String("FoO");
         $t = new String("bAr");
-        $this->assertEquals(1, $s->compareToIgnoreCase($t));
-        $this->assertEquals(-1, $t->compareToIgnoreCase($s));
+        $this->assertGreaterThan(0, $s->compareToIgnoreCase($t));
+        $this->assertLessThan(0, $t->compareToIgnoreCase($s));
         $this->assertEquals(0, $s->compareToIgnoreCase($s));
     }
 

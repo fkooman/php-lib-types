@@ -20,6 +20,7 @@ namespace fkooman\Type;
 
 class BaseType
 {
+    /** @var mixed */
     protected $value;
 
     public function __construct($value)
@@ -27,11 +28,21 @@ class BaseType
         $this->value = $value;
     }
 
+    /**
+     * Get the value of this type.
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * Get the value of this type as a string.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return strval($this->value);
