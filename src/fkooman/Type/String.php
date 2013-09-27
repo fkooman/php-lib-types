@@ -33,7 +33,12 @@ class String extends BaseType
     }
 
     /**
-     * @return int
+     * Compare two strings.
+     *
+     * @param $s     the string to compare against
+     * @return int 0 when strings are equals
+     *             < 0 when this string is smaller than provided string
+     *             > 0 when this string is bigger than provided string
      */
     public function compareTo(String $s)
     {
@@ -41,7 +46,12 @@ class String extends BaseType
     }
 
     /**
-     * @return int
+     * Compare two strings, case insensitively.
+     *
+     * @param $s     the string to compare against
+     * @return int 0 when strings are equals
+     *             < 0 when this string is smaller than provided string
+     *             > 0 when this string is bigger than provided string
      */
     public function compareToIgnoreCase(String $s)
     {
@@ -49,7 +59,10 @@ class String extends BaseType
     }
 
     /**
-     * @return String
+     * Add provided string to the end of this string.
+     *
+     * @param $s the string to add to the end of this string
+     * @return String the concatenated string
      */
     public function concat(String $s)
     {
@@ -57,7 +70,11 @@ class String extends BaseType
     }
 
     /**
-     * @return int
+     * Determine the index of the first occurrence of provided string.
+     *
+     * @param $s the string to search for
+     * @return int the position starting at 0 for the provided string in this
+     *             string
      */
     public function indexOf(String $s)
     {
@@ -70,7 +87,9 @@ class String extends BaseType
     }
 
     /**
-     * @return bool
+     * Determine whether this string is the empty string.
+     *
+     * @return bool true if string is empty, false if string is not empty
      */
     public function isEmpty()
     {
@@ -78,7 +97,9 @@ class String extends BaseType
     }
 
     /**
-     * @return int
+     * Return the length of the string.
+     *
+     * @return int the length
      */
     public function length()
     {
@@ -86,7 +107,10 @@ class String extends BaseType
     }
 
     /**
-     * @return bool
+     * Verify whether this string matches provided regular expression.
+     *
+     * @param $pattern the regular expression, without leading and trailing '/'
+     * @return bool true if the pattern matches, false if it does not match
      */
     public function matches(String $pattern)
     {
@@ -101,7 +125,11 @@ class String extends BaseType
     }
 
     /**
-     * @return String[]
+     * Split the string by the provided delimiter.
+     *
+     * @param $delimiter string to split at.
+     * @return array returns an array of strings containing the split
+     *               string at the delimiter. Removes trailing empty strings
      */
     public function split(String $delimiter)
     {
@@ -121,7 +149,9 @@ class String extends BaseType
     }
 
     /**
-     * @return String
+     * Convert string to lowercase.
+     *
+     * @return String the string as lowercase
      */
     public function toLowerCase()
     {
@@ -129,7 +159,9 @@ class String extends BaseType
     }
 
     /**
-     * @return String
+     * Convert string to uppercase.
+     *
+     * @return String the string as uppercase
      */
     public function toUpperCase()
     {
@@ -137,7 +169,11 @@ class String extends BaseType
     }
 
     /**
-     * @return bool
+     * Determine if this string starts with provided prefix.
+     *
+     * @param $prefix the prefix to check
+     * @return bool true if this string starts with provided prefix, false if
+     *              the this string does not start with provided prefix
      */
     public function startsWith(String $prefix)
     {
@@ -145,7 +181,12 @@ class String extends BaseType
     }
 
     /**
-     * @return String
+     * Extract a portion of the string.
+     *
+     * @param $beginIndex the index to start from, index start at 0
+     * @param $endIndex   the index to stop at, length of returned string is
+     *                    endIndex - beginIndex
+     * @return String the substring between beginIndex and endIndex
      */
     public function substring($beginIndex, $endIndex = null)
     {
@@ -182,7 +223,9 @@ class String extends BaseType
     }
 
     /**
-     * @return String
+     * Remove whitespace from start and end of string.
+     *
+     * @return String the trimmed string
      */
     public function trim()
     {

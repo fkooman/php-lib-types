@@ -30,6 +30,11 @@ class Boolean extends BaseType
         parent::__construct($value);
     }
 
+    /**
+     * Get the value of this type as a string.
+     *
+     * @return string the value as a string
+     */
     public function __toString()
     {
         return $this->value ? "true" : "false";

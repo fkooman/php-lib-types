@@ -31,7 +31,7 @@ class BaseType
     /**
      * Get the value of this type.
      *
-     * @return mixed
+     * @return mixed the value
      */
     public function getValue()
     {
@@ -41,7 +41,7 @@ class BaseType
     /**
      * Get the value of this type as a string.
      *
-     * @return string
+     * @return string the value as a string
      */
     public function __toString()
     {
